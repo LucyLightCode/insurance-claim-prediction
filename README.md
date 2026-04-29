@@ -95,6 +95,7 @@ This project develops a predictive model that estimates the probability of an in
 
 ### Frontend
 - **Streamlit** - Web UI framework
+- http://localhost:8504/
 
 ### DevOps
 - **Docker** - Containerization
