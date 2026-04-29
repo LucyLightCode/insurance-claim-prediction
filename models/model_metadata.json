@@ -1,0 +1,25 @@
+{
+  "numerical_features": [
+    "Building_Age",
+    "Log_Building_Dimension",
+    "Insured_Period",
+    "NumberOfWindows",
+    "Windows_Unknown",
+    "Structural_Risk_Score",
+    "Not_Painted",
+    "Not_Fenced",
+    "No_Garden",
+    "Age_Risk_Interaction",
+    "YearOfObservation",
+    "Residential",
+    "Urban_Flag",
+    "Geo_Code_TargetEnc"
+  ],
+  "categorical_features": [
+    "Building_Type"
+  ],
+  "global_mean_claim_rate": 0.22840153899965024,
+  "model_version": "1.0",
+  "test_roc_auc": 0.85,
+  "threshold": 0.3
+}

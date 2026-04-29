@@ -1,0 +1,65 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (don't upload large datasets)
+data/raw/
+*.csv
+*.xlsx
+
+# Notebooks (keep processed ones, remove exploratory)
+notebooks/scratch/
+*.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# Model files (optional - you might want to keep small models)
+# Uncomment if models are too large for GitHub (>100MB)
+# models/*.pkl
+
+# Temporary files
+*.tmp
+*.bak
