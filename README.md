@@ -116,7 +116,7 @@ This project develops a predictive model that estimates the probability of an in
 
 ```bash
 # Clone repository
-git clone https://github.com/YOUR-USERNAME/insurance-claim-prediction.git
+git clone https://github.com/LucyLightCode/insurance-claim-prediction.git
 cd insurance-claim-prediction
 
 # Install dependencies
