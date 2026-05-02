@@ -3,7 +3,7 @@
 Request and response schemas for the API.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class BuildingInput(BaseModel):
@@ -22,9 +22,9 @@ class BuildingInput(BaseModel):
     NumberOfWindows: str
     Geo_Code: str
     
-    class Config:
-        populate_by_name = True
-        json_schema_extra = {
+    model_config = ConfigDict(
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "YearOfObservation": 2015,
                 "Insured_Period": 1.0,
@@ -40,6 +40,7 @@ class BuildingInput(BaseModel):
                 "Geo_Code": "1053"
             }
         }
+    )
 
 
 class PredictionOutput(BaseModel):
@@ -48,12 +49,22 @@ class PredictionOutput(BaseModel):
     claim_probability: float
     risk_category: str
     recommendation: str
-    model_version: str
+    ml_model_version: str = Field(..., alias="model_version")  # ← FIXED: renamed field
+    
+    model_config = ConfigDict(
+        populate_by_name=True,
+        protected_namespaces=()  # ← FIXED: disable protected namespace warning
+    )
 
 
 class HealthCheck(BaseModel):
     """Health check response."""
     
     status: str
-    model_loaded: bool
-    model_version: str
+    is_model_loaded: bool = Field(..., alias="model_loaded")  # ← FIXED: renamed field
+    ml_model_version: str = Field(..., alias="model_version")  # ← FIXED: renamed field
+    
+    model_config = ConfigDict(
+        populate_by_name=True,
+        protected_namespaces=()  # ← FIXED: disable protected namespace warning
+    )
