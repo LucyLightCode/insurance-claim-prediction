@@ -191,7 +191,7 @@ Predict claim risk for a single building.
 #### `POST /batch_predict`
 Predict risk for multiple buildings.
 
-**Interactive API Documentation:** http://localhost:8000/docs
+**Interactive API Documentation:** [http://localhost:8000/docs](https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd.in%2FeRiTYRZR&urlhash=9vTM&mt=8cJi-VUdZgUR23aSbJhqKNv8A2x4j92uZZxcS72bNE5udYG3E85tLk2GX3_JIPesRRhnldpSJ7PWuFdT0OIh6jwGCnj2eiFFN_9PeZJDu9R_ZqY-McaXZZYORw&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3Bfbtl%2FkplT62zKdJwu7%2BW0Q%3D%3D)
 
 ---
 ## 📁 Project Structure
