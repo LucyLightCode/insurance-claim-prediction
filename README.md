@@ -191,9 +191,10 @@ Predict claim risk for a single building.
 #### `POST /batch_predict`
 Predict risk for multiple buildings.
 
-**Interactive API Documentation:** [[http://localhost:8000/docs](https://insurance-claim-prediction-niha.onrender.com/docs)]
+**Interactive API Documentation:** https://insurance-claim-prediction-niha.onrender.com/docs
 
-https://insurance-claim-prediction-niha.onrender.com/docs
+<img width="738" height="342" alt="Screenshot 2026-05-02 154043" src="https://github.com/user-attachments/assets/d323ae9c-d370-450a-a5bd-bdc2e63422dd" />
+
 
 ---
 ## 📁 Project Structure
