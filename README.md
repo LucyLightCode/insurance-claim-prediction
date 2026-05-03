@@ -94,19 +94,13 @@ This project develops a predictive model that estimates the probability of an in
 - **Pydantic** - Data validation
 
 ### Frontend
-<<<<<<< HEAD
 - **Streamlit** - Web UI framework
-- http://localhost:8504/
-=======
-- **Streamlit** - Web UI framework http://localhost:8504/
->>>>>>> f1971c7 (Update README)
 
 ### DevOps
 - **Docker** - Containerization
 - **Docker Compose** - Multi-container orchestration
 - **GitHub Actions** - CI/CD (coming soon)
 
----
 
 ## 🚀 Quick Start
 
