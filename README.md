@@ -27,7 +27,8 @@
 
 ## 🎯 Overview
 
-<img width="720" height="720" alt="image" src="https://github.com/user-attachments/assets/1c2391f0-f6f5-4194-a9cc-543d56d77cec" />
+<img width="560" height="437" alt="Screenshot 2026-05-03 183335" src="https://github.com/user-attachments/assets/bd5d8772-db20-42a3-bcfc-6843fb1b6911" />
+
 
 
 This project develops a predictive model that estimates the probability of an insurance claim for insured buildings. The system supports insurance risk assessment and underwriting decisions by identifying key factors associated with claim occurrence.
