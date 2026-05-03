@@ -3,10 +3,24 @@
 Streamlit Web Interface for Insurance Claim Risk Prediction
 """
 
+# ═══ CRITICAL: Add project root to Python path FIRST ═══
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+
+# Now import everything else
 import streamlit as st
 import pandas as pd
 import json
-from src.inference import ClaimPredictor
+
+# Import from src module with error handling
+try:
+    from src.inference import ClaimPredictor
+    IMPORT_SUCCESS = True
+    IMPORT_ERROR = None
+except Exception as e:
+    IMPORT_SUCCESS = False
+    IMPORT_ERROR = str(e)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PAGE CONFIG
@@ -60,19 +74,33 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
+# CHECK IMPORTS FIRST
+# ══════════════════════════════════════════════════════════════════════════════
+
+if not IMPORT_SUCCESS:
+    st.error(f"❌ Failed to import ClaimPredictor module")
+    st.code(IMPORT_ERROR)
+    st.info("💡 This usually means the `src` module or its dependencies couldn't be found.")
+    st.stop()
+
+# ══════════════════════════════════════════════════════════════════════════════
 # LOAD MODEL
 # ══════════════════════════════════════════════════════════════════════════════
 
 @st.cache_resource
 def load_predictor():
     """Load model once and cache it."""
-    return ClaimPredictor()
+    try:
+        return ClaimPredictor()
+    except Exception as e:
+        st.error(f"Model loading failed: {e}")
+        return None
 
 try:
     predictor = load_predictor()
-    model_loaded = True
+    model_loaded = predictor is not None
 except Exception as e:
-    st.error(f"❌ Failed to load model: {e}")
+    st.error(f"❌ Failed to initialize model: {e}")
     model_loaded = False
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -89,6 +117,12 @@ st.markdown("""
     <strong>Model Performance:</strong> ROC-AUC 0.85 | Accuracy 82%
 </div>
 """, unsafe_allow_html=True)
+
+# Show model status
+if model_loaded:
+    st.success(f"✅ Model loaded successfully (v{predictor.metadata['model_version']})")
+else:
+    st.error("⚠️ Model not loaded - predictions unavailable")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SIDEBAR - INPUT FORM
@@ -171,84 +205,89 @@ with st.sidebar:
 # MAIN AREA - PREDICTION RESULTS
 # ══════════════════════════════════════════════════════════════════════════════
 
-if predict_button and model_loaded:
-    # Build input dictionary
-    building_data = {
-        'YearOfObservation': year_observation,
-        'Insured_Period': insured_period,
-        'Residential': residential,
-        'Building_Painted': painted,
-        'Building_Fenced': fenced,
-        'Garden': garden,
-        'Settlement': settlement,
-        'Building Dimension': building_dimension,
-        'Building_Type': building_type,
-        'Date_of_Occupancy': occupancy_year,
-        'NumberOfWindows': num_windows,
-        'Geo_Code': geo_code
-    }
-    
-    # Get prediction
-    with st.spinner("Analyzing building risk..."):
-        result = predictor.predict(building_data)
-    
-    # Display results
-    st.success("✅ Prediction Complete!")
-    
-    # Create columns for metrics
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.metric(
-            label="Claim Probability",
-            value=f"{result['claim_probability']:.2%}",
-            delta=None
-        )
-    
-    with col2:
-        st.metric(
-            label="Risk Category",
-            value=result['risk_category'],
-            delta=None
-        )
-    
-    with col3:
-        st.metric(
-            label="Model Version",
-            value=result['model_version'],
-            delta=None
-        )
-    
-    # Risk-based styling
-    risk_category = result['risk_category'].lower().replace(' ', '-')
-    
-    st.markdown(f"""
-    <div class="risk-{risk_category}">
-        <h3>📋 Recommendation</h3>
-        <p style='font-size: 1.1rem; margin: 0; color: green;'>{result['recommendation']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Show detailed breakdown
-    with st.expander("📊 View Detailed Analysis"):
-        st.json(result)
+if predict_button:
+    if not model_loaded:
+        st.error("❌ Cannot make prediction - model is not loaded")
+    else:
+        # Build input dictionary
+        building_data = {
+            'YearOfObservation': year_observation,
+            'Insured_Period': insured_period,
+            'Residential': residential,
+            'Building_Painted': painted,
+            'Building_Fenced': fenced,
+            'Garden': garden,
+            'Settlement': settlement,
+            'Building Dimension': building_dimension,
+            'Building_Type': building_type,
+            'Date_of_Occupancy': occupancy_year,
+            'NumberOfWindows': num_windows,
+            'Geo_Code': geo_code
+        }
         
-        # Show building features
-        st.subheader("Building Features Used in Prediction")
+        # Get prediction
+        try:
+            with st.spinner("Analyzing building risk..."):
+                result = predictor.predict(building_data)
+            
+            # Display results
+            st.success("✅ Prediction Complete!")
+            
+            # Create columns for metrics
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.metric(
+                    label="Claim Probability",
+                    value=f"{result['claim_probability']:.2%}",
+                    delta=None
+                )
+            
+            with col2:
+                st.metric(
+                    label="Risk Category",
+                    value=result['risk_category'],
+                    delta=None
+                )
+            
+            with col3:
+                st.metric(
+                    label="Model Version",
+                    value=result['model_version'],
+                    delta=None
+                )
+            
+            # Risk-based styling
+            risk_category = result['risk_category'].lower().replace(' ', '-')
+            
+            st.markdown(f"""
+            <div class="risk-{risk_category}">
+                <h3>📋 Recommendation</h3>
+                <p style='font-size: 1.1rem; margin: 0;'>{result['recommendation']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Show detailed breakdown
+            with st.expander("📊 View Detailed Analysis"):
+                st.json(result)
+                
+                # Show building features
+                st.subheader("Building Features Used in Prediction")
+                
+                features_df = pd.DataFrame([
+                    {"Feature": "Building Age", "Value": f"{year_observation - occupancy_year} years"},
+                    {"Feature": "Settlement Type", "Value": "Urban" if settlement == "U" else "Rural"},
+                    {"Feature": "Building Dimension", "Value": f"{building_dimension} m²"},
+                    {"Feature": "Painted", "Value": "Yes" if painted == "V" else "No"},
+                    {"Feature": "Fenced", "Value": "Yes" if fenced == "V" else "No"},
+                    {"Feature": "Has Garden", "Value": "Yes" if garden == "V" else "No"},
+                ])
+                
+                st.dataframe(features_df, use_container_width=True, hide_index=True)
         
-        features_df = pd.DataFrame([
-            {"Feature": "Building Age", "Value": f"{year_observation - occupancy_year} years"},
-            {"Feature": "Settlement Type", "Value": "Urban" if settlement == "U" else "Rural"},
-            {"Feature": "Building Dimension", "Value": f"{building_dimension} m²"},
-            {"Feature": "Painted", "Value": "Yes" if painted == "V" else "No"},
-            {"Feature": "Fenced", "Value": "Yes" if fenced == "V" else "No"},
-            {"Feature": "Has Garden", "Value": "Yes" if garden == "V" else "No"},
-        ])
-        
-        st.dataframe(features_df, use_container_width=True, hide_index=True)
-
-elif predict_button and not model_loaded:
-    st.error("❌ Model not loaded. Please check the console for errors.")
+        except Exception as e:
+            st.error(f"❌ Prediction failed: {e}")
+            st.code(str(e))
 
 else:
     # Show example/instructions when no prediction yet
@@ -290,6 +329,6 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666;'>
     <p>Built with ❤️ using Streamlit and Scikit-Learn | 
-    <a href='http://localhost:8000/docs'>API Documentation</a></p>
+    <a href='https://insurance-claim-prediction-niha.onrender.com/docs' target='_blank'>API Documentation</a></p>
 </div>
 """, unsafe_allow_html=True)
