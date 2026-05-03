@@ -1,12 +1,12 @@
-# requirements.txt - Compatible with Python 3.10-3.14
-pandas>=2.2.0
-numpy>=1.26.0
-scikit-learn==1.6.1
-xgboost>=2.0.0
-lightgbm>=4.0.0
-joblib>=1.4.0
-fastapi>=0.100.0
-uvicorn[standard]>=0.23.0
-pydantic>=2.0.0
-streamlit>=1.35.0
-python-multipart>=0.0.6
+# requirements.txt - Pinned versions for Streamlit Cloud
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.2
+joblib==1.4.2
+xgboost==2.1.0
+lightgbm==4.5.0
+fastapi==0.115.0
+uvicorn==0.32.0
+pydantic==2.9.2
+streamlit==1.39.0
+python-multipart==0.0.12
