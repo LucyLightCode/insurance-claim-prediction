@@ -193,5 +193,7 @@ Predict risk for multiple buildings.
 
 **Interactive API Documentation:** [[http://localhost:8000/docs](https://insurance-claim-prediction-niha.onrender.com/docs)]
 
+https://insurance-claim-prediction-niha.onrender.com/docs
+
 ---
 ## 📁 Project Structure
