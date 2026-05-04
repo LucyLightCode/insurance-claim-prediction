@@ -263,7 +263,7 @@ if predict_button:
             st.markdown(f"""
             <div class="risk-{risk_category}">
                 <h3>📋 Recommendation</h3>
-                <p style='font-size: 1.1rem; margin: 0;'>{result['recommendation']}</p>
+                <p style='font-size: 1.1rem; margin: 0; color: green;'>{result['recommendation']}</p>
             </div>
             """, unsafe_allow_html=True)
             
