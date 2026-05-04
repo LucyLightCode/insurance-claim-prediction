@@ -93,14 +93,14 @@ This project develops a predictive model that estimates the probability of an in
 - **Joblib** - Model serialization
 
 ### Backend
-- **FastAPI** - REST API framework: https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd.in%2FeRiTYRZR&urlhash=9vTM&mt=bpScYbLYFFUnut2JvdHTXAGODX9IZECRRkntnFjR1G5a5DEDDbZ16d1pc-zl4f474QOGC3g2Dp113si9gpL_3UMTE1FFQjXGZYH_rqykh5ihy9eKureIOQHz8w&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BQiE4yOOgSdSSOjB%2FkHJhFg%3D%3D
+- **FastAPI** - REST API framework: https://insurance-claim-prediction-niha.onrender.com/docs
 - **Uvicorn** - ASGI server
 - **Pydantic** - Data validation
 - <img width="738" height="342" alt="Screenshot 2026-05-02 154043" src="https://github.com/user-attachments/assets/d323ae9c-d370-450a-a5bd-bdc2e63422dd" />
 
 
 ### Frontend
-- **Streamlit** - Web UI framework: https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd.in%2FemHqUHrk&urlhash=Rqyo&mt=RZS_SXI2R22E_y17SFLyI_wbrBonc63CEijK-9Ur_SnPpUWN83ocbhwARcaHXhlR5BceKeRz9LATyCYDrngz_lHerkixhlscke43rlVLLYc7JVFIzsJhGCCoWQ&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BQiE4yOOgSdSSOjB%2FkHJhFg%3D%3D
+- **Streamlit** - Web UI framework: https://lucylightcode-insurance-claim-prediction-app-standalone-fap22k.streamlit.app/
   
 - <img width="1159" height="641" alt="Screenshot 2026-05-04 150907" src="https://github.com/user-attachments/assets/6a51b0fa-f043-45d1-a8d0-9689cc8150a1" />
 
