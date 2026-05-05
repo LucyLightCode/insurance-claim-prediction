@@ -1,6 +1,9 @@
-# 🏠 Insurance Claim Risk Prediction System
+# 🏠 Insurance Risk Scoring Model (Underwriting & Decision System)
 
-> Machine learning system for predicting insurance claim probability for buildings using structural, geographical, and usage characteristics.
+> This project builds a risk scoring and decision support system that predicts the probability of insurance claims for insured buildings.
+
+It is designed to simulate real-world underwriting workflows, enabling insurers to assess risk, segment customers, and make data-driven policy approval decisions.
+
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100-green.svg)](https://fastapi.tiangolo.com/)
@@ -30,14 +33,41 @@
 <img width="560" height="437" alt="Screenshot 2026-05-03 183335" src="https://github.com/user-attachments/assets/bd5d8772-db20-42a3-bcfc-6843fb1b6911" />
 
 
+- This project builds a risk scoring and decision support system that predicts the probability of insurance claims for insured buildings.
+- It is designed to simulate real-world underwriting workflows, enabling insurers to assess risk, segment customers, and make data-driven policy approval decisions.
 
-This project develops a predictive model that estimates the probability of an insurance claim for insured buildings. The system supports insurance risk assessment and underwriting decisions by identifying key factors associated with claim occurrence.
+### 💼 Business Impact
+- 📈 ROC-AUC: 0.85 – strong ability to distinguish high vs low-risk policies
+- 🎯 Recall: 80% – effectively identifies high-risk cases (reducing potential losses)
+- 💰 Supports risk-based underwriting, pricing, and portfolio optimization
+- ⚖️ Enables risk segmentation (Low → Very High) for better decision-making
 
-### Business Impact
+🧠 Key Capabilities
+- Risk Scoring – Predicts probability of claim occurrence (0–1)
+- Risk Banding – Segments customers into actionable risk tiers
+- Decision Engine – Provides underwriting recommendations
+- Feature-Based Risk Insights – Identifies key drivers of claim risk
 
-- **ROC-AUC Score**: 0.85 (significantly above baseline)
-- **Recall**: 80% (high claim detection rate)
-- **Real-world use**: Helps underwriters make data-driven decisions on policy approvals
+⚙️ Modeling Approach
+- Built classification models: Logistic Regression, Random Forest, Gradient Boosting
+- Handled class imbalance using appropriate techniques
+- Applied feature engineering (15+ features) to improve predictive power
+- Ensured no data leakage with strict train/test separation
+
+📊 Risk Drivers Identified
+- Geographic location (primary risk factor)
+- Building age (older = higher risk)
+- Structural condition indicators
+- Property size and exposure
+
+
+🧩 Real-World Application
+
+- This system can be extended to:
+
+- Credit risk scoring (loan approval decisions)
+- Fraud detection systems
+- Customer risk profiling in fintech
 
 ---
 
